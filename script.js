@@ -5,21 +5,27 @@ const taxTotal = document.querySelector("[data-tax-total]");
 const unusedFare = document.querySelector("[data-unused-fare]");
 const surcharge = document.querySelector("[data-surcharge]");
 const penalty = document.querySelector("[data-penalty]");
-const nuc = document.querySelector("#nuc-calc")
-const nucCheckBox = document.querySelector("#nuc")
-const nucBlock = document.querySelector(".nuc-calc-block")
-const totalAmount = document.querySelector("[data-total-receivable]")
+const nuc = document.querySelector("#nuc-calc");
+const nucCheckBox = document.querySelector("#nuc");
+const nucBlock = document.querySelector(".nuc-calc-block");
+const totalAmount = document.querySelector("[data-total-receivable]");
 
 let data = [];
 let obj = {};
+let totalTaxAmount = 0;
 let farePortion = 0;
 let qSurcharge = 0;
 let penalties = 0;
-let nucValue = 0
+let nucValue = 0;
+let totalBaseFare = 0;
+let totBaseWithNuc = 0;
+let grandTotalAmount = 0;
 
 nucCheckBox.addEventListener("click", (e) => {
-    e.target.checked ? nucBlock.style.display = "block" : nucBlock.style.display = "none"
-})
+  e.target.checked
+    ? (nucBlock.style.display = "block")
+    : (nucBlock.style.display = "none");
+});
 
 taxBox1.forEach((box) => {
   box.addEventListener("change", (e) => {
@@ -43,23 +49,23 @@ taxCode.forEach((code) => {
 
 unusedFare.addEventListener("change", (e) => {
   farePortion = e.target.value;
-  console.log(farePortion);
+  totalBase();
 });
 
 surcharge.addEventListener("change", (e) => {
   qSurcharge = e.target.value;
-  console.log(qSurcharge);
+  totalBase();
 });
 
-nuc.addEventListener('change', (e) => {
-    nucValue = e.target.value
-    console.log(nucValue)
-})
+nuc.addEventListener("change", (e) => {
+  nucValue = e.target.value;
+  calculateNuc();
+});
 
 penalty.addEventListener("change", (e) => {
-    penalties = e.target.value;
-    console.log(penalties);
-  });
+  penalties = e.target.value;
+  addPenalty();
+});
 
 function calculate(taxCode) {
   let num = 0;
@@ -76,12 +82,31 @@ function calculate(taxCode) {
 }
 
 function totalTax() {
-  let sum = 0;
   for (let total in obj) {
     if (obj !== undefined) {
-      sum += parseFloat(obj[total]);
+      totalTaxAmount += parseFloat(obj[total]);
     }
   }
-  sum = sum.toFixed(2);
-  taxTotal.innerText = sum;
+//   totalTaxAmount = totalTaxAmount.toFixed(2);
+  taxTotal.innerText = totalTaxAmount;
 }
+
+function totalBase() {
+  totalBaseFare = parseFloat(farePortion) + parseFloat(qSurcharge);
+  totalBaseFare = totalBaseFare.toFixed(2);
+}
+
+function calculateNuc() {
+  totBaseWithNuc = parseFloat(totalBaseFare) * parseFloat(nucValue);
+  console.log(totBaseWithNuc);
+}
+
+function addPenalty() {
+  if (totBaseWithNuc > 0) {
+    console.log(parseFloat(penalties) + parseFloat(totBaseWithNuc));
+  } else {
+    console.log(parseFloat(penalties) + parseFloat(totalBaseFare));
+  }
+}
+
+
