@@ -26,24 +26,45 @@ nucCheckBox.addEventListener("click", (e) => {
 })
 
 taxBox1.forEach((box) => {
-  box.addEventListener("change", (e) => {
+  box.addEventListener("input", (e) => {
     data[0] = e.target.value;
+    calculate()
+    console.log(sumTaxes)
   });
 });
 
 taxBox2.forEach((box) => {
-  box.addEventListener("change", (e) => {
+  box.addEventListener("input", (e) => {
     data[1] = e.target.value;
+    calculate()
+    console.log(sumTaxes)
   });
 });
 
 taxCode.forEach((code) => {
-  code.addEventListener("change", () => {
-    code.value = code.value.toLocaleUpperCase("en-US");
-    calculate(code.value);
-    code.nextElementSibling.innerText = obj[code.value];
-  });
+  code.addEventListener("input", setTaxCalcDisplay);
 });
+
+function calculate() {
+    if (data[0] && data[1]) {
+        data[0] = parseFloat(data[0])
+        data[1] = parseFloat(data[1])
+      if (data[0] > data[1]) {
+        sumTaxes = data[0] - data[1];
+        sumTaxes = sumTaxes.toFixed(2);
+      } else {
+        sumTaxes = 0;
+      }
+    }
+  }
+
+function setTaxCalcDisplay(e) {
+    obj[e.target.value] = sumTaxes;
+    e.target.nextElementSibling.innerText = obj[e.target.value];
+    if(e) {
+        e.target.value = e.target.value.toLocaleUpperCase("en-US");
+    }
+}
 
 unusedFare.addEventListener("change", (e) => {
   farePortion = e.target.value;
@@ -67,19 +88,6 @@ penalty.addEventListener("change", (e) => {
     penalties = e.target.value;
     sumAllNumbers()
   });
-
-function calculate(taxCode) {
-  if (data[0] && data[1]) {
-    if (parseFloat(data[0]) > parseFloat(data[1])) {
-      tax = parseFloat(data[0]) - parseFloat(data[1]);
-      tax = tax.toFixed(2);
-    } else {
-      tax = 0;
-    }
-  }
-  obj[taxCode] = tax;
-  totalTax();
-}
 
 function totalTax() {
   sumTaxes = 0
