@@ -64,6 +64,13 @@ body {
     align-items:flex-end;
 }
 
+.tax-box-labels {
+    display: flex;
+    margin-top: .5rem;
+    gap: 1.3rem;
+    width: 50%;
+}
+
 .tax-item {
     margin-top: 1rem;
 }
@@ -86,6 +93,10 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+input {
+    font-size: 1rem;
 }
 
 .total-spans {

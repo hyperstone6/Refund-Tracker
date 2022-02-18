@@ -56,7 +56,7 @@ taxBox2.forEach((box) => {
 taxCode.forEach((codeBox) => {
   codeBox.addEventListener("input", (e) => {
     e.target.value = e.target.value.toLocaleUpperCase()
-    if (e.target.value.length == 2) {
+    if (e.target.value.length == 4) {
       e.target.nextElementSibling.disabled = false
       e.target.nextElementSibling.nextElementSibling.disabled = false
       taxObj[e.target.value] = {};
