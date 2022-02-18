@@ -5,123 +5,152 @@ const taxTotal = document.querySelector("[data-tax-total]");
 const unusedFare = document.querySelector("[data-unused-fare]");
 const surcharge = document.querySelector("[data-surcharge]");
 const penalty = document.querySelector("[data-penalty]");
-const nuc = document.querySelector("#nuc-calc")
-const nucCheckBox = document.querySelector("#nuc")
-const nucBlock = document.querySelector(".nuc-calc-block")
-const totalAmount = document.querySelector("[data-total-receivable]")
+const nuc = document.querySelector("#nuc-calc");
+const nucCheckBox = document.querySelector("#nuc");
+const nucBlock = document.querySelector(".nuc-calc-block");
+const totalAmount = document.querySelector("[data-total-receivable]");
 
-let data = [];
 let obj = {};
 let sumTaxes = 0;
+let sumAllTaxes = 0
 let farePortion = 0;
 let qSurcharge = 0;
 let penalties = 0;
-let nucValue = 0
-let totalBaseFare = 0
-let totBaseWithNuc = 0
-let grandTotal = 0
+let nucValue = 0;
+let totalBaseFare = 0;
+let totBaseWithNuc = 0;
+let grandTotal = 0;
 
-nucCheckBox.addEventListener("click", (e) => {
-    e.target.checked ? nucBlock.style.display = "block" : nucBlock.style.display = "none"
-})
+let taxObj = {};
 
 taxBox1.forEach((box) => {
   box.addEventListener("input", (e) => {
-    data[0] = e.target.value;
-    calculate()
-    console.log(sumTaxes)
+    let prev = e.target.previousElementSibling
+    let next = e.target.nextElementSibling.nextElementSibling
+    if (taxObj.hasOwnProperty(prev.value)) {
+      codeInTaxBox = box.dataset.taxBox1
+      let taxCodeValue = prev.value
+      taxObj[taxCodeValue][codeInTaxBox] = parseFloat(e.target.value);
+      calculateTax(prev.value)
+      next.innerText = obj[prev.value].toFixed(2)
+      sumAllNumbers()
+    }
   });
 });
 
 taxBox2.forEach((box) => {
   box.addEventListener("input", (e) => {
-    data[1] = e.target.value;
-    calculate()
-    console.log(sumTaxes)
+    let prev = e.target.previousElementSibling.previousElementSibling
+    let next = e.target.nextElementSibling
+    if (taxObj.hasOwnProperty(prev.value)) {
+    codeInTaxBox = box.dataset.taxBox2
+    let taxCodeValue = prev.value
+    taxObj[taxCodeValue][codeInTaxBox] = parseFloat(e.target.value);
+    calculateTax(prev.value)
+    next.innerText = obj[prev.value].toFixed(2)
+    sumAllNumbers()
+  }
   });
 });
 
-taxCode.forEach((code) => {
-  code.addEventListener("input", setTaxCalcDisplay);
+taxCode.forEach((codeBox) => {
+  codeBox.addEventListener("input", (e) => {
+    e.target.value = e.target.value.toLocaleUpperCase()
+    if (e.target.value.length == 2) {
+      e.target.nextElementSibling.disabled = false
+      e.target.nextElementSibling.nextElementSibling.disabled = false
+      taxObj[e.target.value] = {};
+    } else {
+      e.target.nextElementSibling.disabled = true
+      e.target.nextElementSibling.nextElementSibling.disabled = true
+    }
+  });
 });
 
-function calculate() {
-    if (data[0] && data[1]) {
-        data[0] = parseFloat(data[0])
-        data[1] = parseFloat(data[1])
-      if (data[0] > data[1]) {
-        sumTaxes = data[0] - data[1];
-        sumTaxes = sumTaxes.toFixed(2);
-      } else {
-        sumTaxes = 0;
-      }
+unusedFare.addEventListener("input", (e) => {
+  farePortion = e.target.value;
+  totalBase();
+  sumAllNumbers();
+});
+
+surcharge.addEventListener("input", (e) => {
+  qSurcharge = e.target.value;
+  totalBase();
+  sumAllNumbers();
+});
+
+nuc.addEventListener("input", (e) => {
+  nucValue = e.target.value;
+  calculateNuc();
+  sumAllNumbers();
+});
+
+nucCheckBox.addEventListener("click", (e) => {
+  e.target.checked
+    ? (nucBlock.style.display = "block")
+    : (nucBlock.style.display = "none");
+});
+
+penalty.addEventListener("input", (e) => {
+  penalties = e.target.value;
+  sumAllNumbers();
+});
+
+function calculateTax(taxCodeToCalc) {
+  let oldTaxValue = 0
+  let newTaxValue = 0
+  let taxCodeObject = Object.keys(taxObj[taxCodeToCalc])
+  if(taxCodeObject[0]) {
+    if(taxCodeObject[0][2] == 'o') {
+      oldTaxValue = Object.values(taxObj[taxCodeToCalc])[0]
+    } else {
+      oldTaxValue = Object.values(taxObj[taxCodeToCalc])[1]
     }
   }
-
-function setTaxCalcDisplay(e) {
-    obj[e.target.value] = sumTaxes;
-    e.target.nextElementSibling.innerText = obj[e.target.value];
-    if(e) {
-        e.target.value = e.target.value.toLocaleUpperCase("en-US");
+  if(taxCodeObject[1]) {
+    if(taxCodeObject[1][2] == 'n') {
+      newTaxValue = Object.values(taxObj[taxCodeToCalc])[1]
+    } else {
+      newTaxValue = Object.values(taxObj[taxCodeToCalc])[0]
     }
+  }
+  if(oldTaxValue > newTaxValue) {
+    sumTaxes = oldTaxValue - newTaxValue
+  } else  {
+    sumTaxes = 0
+  }
+  obj[taxCodeToCalc] = sumTaxes
+  totalTax()
 }
 
-unusedFare.addEventListener("change", (e) => {
-  farePortion = e.target.value;
-  totalBase()
-  sumAllNumbers()
-});
-
-surcharge.addEventListener("change", (e) => {
-  qSurcharge = e.target.value;
-  totalBase()
-  sumAllNumbers()
-});
-
-nuc.addEventListener('change', (e) => {
-    nucValue = e.target.value
-    calculateNuc()
-    sumAllNumbers()
-})
-
-penalty.addEventListener("change", (e) => {
-    penalties = e.target.value;
-    sumAllNumbers()
-  });
-
 function totalTax() {
-  sumTaxes = 0
+  let totalOfAllTaxes = 0
   for (let total in obj) {
     if (obj !== undefined) {
-      sumTaxes += parseFloat(obj[total]);
+      totalOfAllTaxes += parseFloat(obj[total]);
     }
   }
-  taxTotal.innerText = sumTaxes;
+  taxTotal.innerText = totalOfAllTaxes.toFixed(2);
+  sumAllTaxes = totalOfAllTaxes
 }
 
 function totalBase() {
-    totalBaseFare = parseFloat(farePortion) + parseFloat(qSurcharge)
-    totalBaseFare = totalBaseFare.toFixed(2)
+  totalBaseFare = parseFloat(farePortion) + parseFloat(qSurcharge);
+  totalBaseFare = totalBaseFare.toFixed(2);
 }
 
 function calculateNuc() {
-    totBaseWithNuc = parseFloat(totalBaseFare) * parseFloat(nucValue)
-    console.log(totBaseWithNuc)
+  totBaseWithNuc = parseFloat(totalBaseFare) * parseFloat(nucValue);
+  console.log(totBaseWithNuc);
 }
 
-// function addPenalty() {
-//     if(totBaseWithNuc > 0) {
-//         console.log(penalties + totBaseWithNuc)
-//     } else {
-//         console.log(penalties + totalBaseFare)
-//     }
-// }
-
 function sumAllNumbers() {
-    if(nucValue) {
-      grandTotal = parseFloat(totBaseWithNuc) + parseFloat(sumTaxes) - parseFloat(penalties)
-    } else {
-      grandTotal = parseFloat(totalBaseFare) + parseFloat(sumTaxes) - parseFloat(penalties)
-    }
-    totalAmount.innerText = grandTotal
+  if (nucValue) {
+    grandTotal =
+      parseFloat(totBaseWithNuc) + parseFloat(sumAllTaxes) - parseFloat(penalties);
+  } else {
+    grandTotal =
+      parseFloat(totalBaseFare) + parseFloat(sumAllTaxes) - parseFloat(penalties);
+  }
+  totalAmount.innerText = grandTotal.toFixed(2);
 }
