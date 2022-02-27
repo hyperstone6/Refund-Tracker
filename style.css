@@ -33,10 +33,11 @@ body {
 .top-section {
     display: flex;
     justify-content: center;
+    position: relative;
 }
 
-.scrachpad {
-    width: 100%;
+.scratchpad {
+    width: 98%;
     height: 14em;
     border-radius: 1em;
     border: none;
@@ -44,13 +45,31 @@ body {
     resize: none;
 }
 
-.scrachpad:not(:last-child) {
+.scratchpad:not(:last-child) {
     margin-right: .8rem;
+}
+
+.parse-btn {
+    position: absolute;
+    top: 16rem;
+    left:.5rem;
+    cursor: pointer;
+    padding: .2rem 2rem;
+    border-radius: 1rem;
+    transition: transform 250ms ease;
+}
+
+.parse-btn:hover {
+    transform: translateY(-1px);
+}
+
+.parse-btn:active {
+    transform: translateY(1px);
 }
 
 .mid-section {
     display: flex;
-    min-height: 56rem;
+    min-height: 75rem;
 }
 .sub-section {
     width: 100%;
@@ -96,7 +115,7 @@ input[type=number] {
 }
 
 .total-spans {
-    margin-top: 1rem;
+    margin-top: 3rem;
     color: var(--color-2);
 }
 
@@ -115,10 +134,17 @@ input[type=number] {
 
 .fares {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    align-items:flex-start;
-    margin: .8rem 0;
+    /* justify-content: space-around; */
+    margin: .8rem 2rem;
+}
+
+label {
+    margin-right: 5rem;
+}
+
+#nuc-label {
+    margin-right: 1rem;
 }
 
 .fare {

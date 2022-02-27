@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>Logic - Refund Tracker</title>
     <script defer src="./calc_logic.js"></script>
   </head>
   <body>
     <div class="tax-box-container">
+      <textarea class="scratchpad" data-scratchpad id="w3review" rows="4" cols="50" placeholder="Notepad"></textarea>
+        <button class="parse-btn" data-parse-btn="01">Parse</button>
       <div class="tax-column">
         <input
           class="tax-item tax-code"
@@ -21,14 +23,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="21o"
+          data-tax-box1="01o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="21n"
+          data-tax-box2="01n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -44,14 +46,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="22o"
+          data-tax-box1="02o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="22n"
+          data-tax-box2="02n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -69,14 +71,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="23o"
+          data-tax-box1="03o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="23n"
+          data-tax-box2="03n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -92,62 +94,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="24o"
+          data-tax-box1="04o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="24n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-      </div>
-      <div class="tax-column">
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="25o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="25n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="26o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="26n"
+          data-tax-box2="04n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -165,14 +119,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="27o"
+          data-tax-box1="05o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="27n"
+          data-tax-box2="05n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -188,62 +142,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="28o"
+          data-tax-box1="06o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="28n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-      </div>
-      <div class="tax-column">
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="29o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="29n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="30o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="30n"
+          data-tax-box2="06n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -261,14 +167,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="31o"
+          data-tax-box1="07o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="31n"
+          data-tax-box2="07n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -284,62 +190,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="32o"
+          data-tax-box1="08o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="32n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-      </div>
-      <div class="tax-column">
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="33o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="33n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="34o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="34n"
+          data-tax-box2="08n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -357,14 +215,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="35o"
+          data-tax-box1="09o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="35n"
+          data-tax-box2="09n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -380,62 +238,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="36o"
+          data-tax-box1="10o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="36n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-      </div>
-      <div class="tax-column">
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="37o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="37n"
-          type="number"
-          placeholder="NEWTAX"
-        />
-
-        <div class="tax-result" data-tax-result></div>
-        <input
-          class="tax-item tax-code"
-          title="Please enter 2-letter or 4-letter tax code"
-          data-tax-code
-          type="text"
-          placeholder="TXCDE"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box1="38o"
-          type="number"
-          placeholder="OLDTAX"
-        />
-        <input
-          disabled
-          class="tax-item tax-box"
-          data-tax-box2="38n"
+          data-tax-box2="10n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -453,14 +263,206 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="39o"
+          data-tax-box1="11o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="39n"
+          data-tax-box2="11n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="12o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="12n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+      </div>
+      <div class="tax-column">
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="13o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="13n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="14o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="14n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+      </div>
+      <div class="tax-column">
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="15o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="15n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="16o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="16n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+      </div>
+      <div class="tax-column">
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="17o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="17n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="18o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="18n"
+          type="number"
+          placeholder="NEWTAX"
+        />
+
+        <div class="tax-result" data-tax-result></div>
+      </div>
+      <div class="tax-column">
+        <input
+          class="tax-item tax-code"
+          title="Please enter 2-letter or 4-letter tax code"
+          data-tax-code
+          type="text"
+          placeholder="TXCDE"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box1="19o"
+          type="number"
+          placeholder="OLDTAX"
+        />
+        <input
+          disabled
+          class="tax-item tax-box"
+          data-tax-box2="19n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -475,14 +477,14 @@
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box1="40o"
+          data-tax-box1="20o"
           type="number"
           placeholder="OLDTAX"
         />
         <input
           disabled
           class="tax-item tax-box"
-          data-tax-box2="40n"
+          data-tax-box2="20n"
           type="number"
           placeholder="NEWTAX"
         />
@@ -491,26 +493,34 @@
       </div>
     </div>
     <div class="fares">
-      <label for="fare" class="unused-fares">Unused Fare</label>
-      <input type="number" class="fare" id="fare" data-unused-fare />
-      <label for="surcharge" class="surcharge">Q SRCH</label>
-      <input type="text" class="fare" id="surcharge" data-surcharge />
-      <label for="nuc">NUC?</label>
+      <div>
+        <label style="display: block;" for="fare" class="unused-fares">Unused Fare</label>
+        <input type="number" class="fare" id="fare" data-unused-fare />
+      </div>
+      <div>
+        <label style="display: block;" for="surcharge" class="surcharge">Q SRCH</label>
+        <input type="text" class="fare" id="surcharge" data-surcharge />
+      </div>
+    </div>
+    <div class="fares">
+      <label id="nuc-label" for="nuc">NUC?</label>
       <input type="checkbox" name="nuc" id="nuc" />
     </div>
-    <div class="nuc-calc-block">
-      <label for="nuc-calc">NUC Exchange Value</label>
-      <input type="number" id="nuc-calc" class="fare" data-nuc-calc />
+    <div class="fares">
+      <div class="penalties">
+        <label style="display: block;" for="penalty" class="unused-fares">Penalty Fee</label>
+        <input type="number" class="fare" id="penalty" data-penalty />
+      </div>
+      <div class="nuc-calc-block">
+        <label style="display: block;" for="nuc-calc">NUC Value</label>
+        <input style="display: block;" type="number" id="nuc-calc" class="fare" data-nuc-calc />
+      </div>
     </div>
-    <div class="penalties">
-      <label for="penalty" class="unused-fares">Penalty Fee</label>
-      <input type="number" class="fare" id="penalty" data-penalty />
-    </div>
-    <div class="total-spans">
+    <div class="total-spans fares">
       <span class="tax-total-label">Total Tax Difference:</span>
       <span class="tax-total" data-tax-total></span>
     </div>
-    <div class="grand-totals">
+    <div class="grand-totals fares">
       <span class="tax-total-label">Total Amount Receivable:</span>
       <span class="tax-total" data-total-receivable></span>
     </div>
