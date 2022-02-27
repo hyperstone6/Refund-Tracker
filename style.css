@@ -49,14 +49,21 @@ body {
     margin-right: .8rem;
 }
 
-.parse-btn {
-    position: absolute;
-    top: 16rem;
-    left:.5rem;
+.btn {
     cursor: pointer;
     padding: .2rem 2rem;
     border-radius: 1rem;
     transition: transform 250ms ease;
+    position: absolute;
+    top: 16rem;
+}
+
+.parse-btn {
+    left:.5rem;
+}
+
+.clear-btn {
+    left:9rem;
 }
 
 .parse-btn:hover {
@@ -74,6 +81,20 @@ body {
 .sub-section {
     width: 100%;
     min-height: 100%;
+    position: relative;
+}
+
+.add-new-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    padding: .1em .5em;
+}
+
+.add-new-btn:hover {
+    /* translate: -50px; */
 }
 
 .chd-iframe{
