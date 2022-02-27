@@ -22,8 +22,6 @@ let totalBaseFare = 0;
 let totBaseWithNuc = 0;
 let grandTotal = 0;
 
-
-
 taxBox1.forEach((box) => {
   box.addEventListener("input", taxBox1Fn);
   box.addEventListener("change", taxBox1Fn);
@@ -102,9 +100,14 @@ if (nuc !== null || nuc !== undefined) {
 }
 
 nucCheckBox.addEventListener("click", (e) => {
-  e.target.checked
-    ? (nucBlock.style.display = "block")
-    : (nucBlock.style.display = "none");
+  if (e.target.checked) {
+    nucBlock.style.display = "block";
+  } else {
+    nucBlock.style.display = "none";
+    nuc.value = ""
+    nucValue = 0
+    sumAllNumbers()
+  }
 });
 
 if (penalty !== null || penalty !== undefined) {
@@ -161,7 +164,6 @@ function totalBase() {
 
 function calculateNuc() {
   totBaseWithNuc = parseFloat(totalBaseFare) * parseFloat(nucValue);
-  console.log(totBaseWithNuc);
 }
 
 function sumAllNumbers() {
@@ -180,7 +182,7 @@ function sumAllNumbers() {
 }
 //////////////////////////////////////////////////////////////////
 
-const scratchpad = document.querySelector("[data-scratchpad]")
+const scratchpad = document.querySelector("[data-scratchpad]");
 const scratchBtn = document.querySelector("[data-parse-btn]");
 
 let pastedText = "";
@@ -192,67 +194,63 @@ let regex;
 let testArr = [];
 let newObj = {};
 
-scratchpad.addEventListener('input', (e)=> {
-    if(e.target.value.includes('CAD')) {
-      regex = /TX...CAD/g
-    } else if(e.target.value.includes('USD')) {
-      regex = /TX...USD/g
-    }
-})
+scratchpad.addEventListener("input", (e) => {
+  if (e.target.value.includes("CAD")) {
+    regex = /TX...CAD/g;
+  } else if (e.target.value.includes("USD")) {
+    regex = /TX...USD/g;
+  }
+});
 
 if (scratchBtn !== null && scratchBtn !== undefined) {
   scratchBtn.addEventListener("click", (e) => {
-      
-      pastedText = e.target.previousElementSibling.value;
-      splitted = pastedText.split(regex);
-      for (let index of splitted) {
-        if (index) {
-          clndUp.push(index.replace(/\s/g, ""));
+    pastedText = e.target.previousElementSibling.value;
+    splitted = pastedText.split(regex);
+    for (let index of splitted) {
+      if (index) {
+        clndUp.push(index.replace(/\s/g, ""));
+      }
+    }
+    for (let i = 0; i < clndUp.length; i++) {
+      clndUp[i] = clndUp[i] + taxBox1[i].dataset.taxBox1.slice(0, 2);
+    }
+    for (let index = 0; index < clndUp.length; index++) {
+      let clndKeys = clndUp[index];
+      if (!isNaN(parseFloat(clndKeys))) {
+        if (newObj[clndKeys.slice(clndKeys.length - 4)]) {
+          newObj[clndKeys.slice(clndKeys.length - 4)] += parseFloat(clndKeys);
+          alert(
+            `Taxes with same tax code were combined. Combined tax: ${clndKeys.slice(
+              clndKeys.length - 2
+            )}`
+          );
+        } else {
+          newObj[clndKeys.slice(clndKeys.length - 4)] = parseFloat(clndKeys);
+          testArr.push({
+            [clndKeys.slice(clndKeys.length - 4)]: parseFloat(clndKeys),
+          });
         }
       }
-      for(let i = 0; i < clndUp.length; i++) {
-        clndUp[i] = clndUp[i] + taxBox1[i].dataset.taxBox1.slice(0,2)
+    }
+    for (let i = 0; i < testArr.length; i++) {
+      let prev = taxBox1[i].previousElementSibling;
+      let next = taxBox1[i].nextElementSibling.nextElementSibling;
+      codeInTaxBox1 = taxBox1[i].dataset.taxBox1;
+      taxCode[i].value = Object.keys(testArr[i]);
+      taxCode[i].nextElementSibling.disabled = false;
+      taxCode[i].nextElementSibling.nextElementSibling.disabled = false;
+      taxObj[taxCode[i].value] = {};
+      taxBox1[i].value = Object.values(testArr[i]);
+      taxObj[prev.value][codeInTaxBox1] = parseFloat(taxBox1[i].value);
+      taxBox2[i].value = 0;
+      calculateTax(prev.value);
+      next.innerText = obj[prev.value];
+    }
+    for (let num in newObj) {
+      if (newObj) {
+        tot += newObj[num];
       }
-      for (let index = 0; index < clndUp.length; index++) {
-        let clndKeys = clndUp[index];
-        if (!isNaN(parseFloat(clndKeys))) {
-          if (newObj[clndKeys.slice(clndKeys.length - 4)]) {
-            newObj[clndKeys.slice(clndKeys.length - 4)] +=
-              parseFloat(clndKeys);
-            alert(
-              `Taxes with same tax code were combined. Combined tax: ${clndKeys.slice(
-                clndKeys.length - 2
-              )}`
-            );
-          } else {
-            newObj[clndKeys.slice(clndKeys.length - 4)] =
-              parseFloat(clndKeys);
-            testArr.push({
-              [clndKeys.slice(clndKeys.length - 4)]:
-                parseFloat(clndKeys),
-            });
-          }
-        }
-      }
-      for (let i = 0; i < testArr.length; i++) {
-        let prev = taxBox1[i].previousElementSibling;
-        let next = taxBox1[i].nextElementSibling.nextElementSibling;
-        codeInTaxBox1 = taxBox1[i].dataset.taxBox1;
-        taxCode[i].value = Object.keys(testArr[i]);
-        taxCode[i].nextElementSibling.disabled = false;
-        taxCode[i].nextElementSibling.nextElementSibling.disabled = false;
-        taxObj[taxCode[i].value] = {};
-        taxBox1[i].value = Object.values(testArr[i]);
-        taxObj[prev.value][codeInTaxBox1] = parseFloat(taxBox1[i].value);
-        taxBox2[i].value = 0
-        calculateTax(prev.value)
-        next.innerText = obj[prev.value];
-      }
-      for (let num in newObj) {
-        if (newObj) {
-          tot += newObj[num];
-        }
-      }
-      sumAllNumbers()
-    });
+    }
+    sumAllNumbers();
+  });
 }
