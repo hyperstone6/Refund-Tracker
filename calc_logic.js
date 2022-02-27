@@ -11,6 +11,7 @@ const nucBlock = document.querySelector(".nuc-calc-block");
 const totalAmount = document.querySelector("[data-total-receivable]");
 
 let obj = {};
+let taxObj = {};
 let sumTaxes = 0;
 let sumAllTaxes = 0;
 let farePortion = 0;
@@ -21,9 +22,7 @@ let totalBaseFare = 0;
 let totBaseWithNuc = 0;
 let grandTotal = 0;
 
-let taxObj = {};
 
-let newObj = {};
 
 taxBox1.forEach((box) => {
   box.addEventListener("input", taxBox1Fn);
@@ -181,8 +180,8 @@ function sumAllNumbers() {
 }
 //////////////////////////////////////////////////////////////////
 
-const scratchBtn = document.querySelectorAll("[data-parse-btn]");
 const scratchpad = document.querySelector("[data-scratchpad]")
+const scratchBtn = document.querySelector("[data-parse-btn]");
 
 let pastedText = "";
 let foundTaxes = "";
@@ -191,6 +190,7 @@ let clndUp = [];
 let tot = 0;
 let regex;
 let testArr = [];
+let newObj = {};
 
 scratchpad.addEventListener('input', (e)=> {
     if(e.target.value.includes('CAD')) {
@@ -201,8 +201,7 @@ scratchpad.addEventListener('input', (e)=> {
 })
 
 if (scratchBtn !== null && scratchBtn !== undefined) {
-  scratchBtn.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+  scratchBtn.addEventListener("click", (e) => {
       
       pastedText = e.target.previousElementSibling.value;
       splitted = pastedText.split(regex);
@@ -246,9 +245,7 @@ if (scratchBtn !== null && scratchBtn !== undefined) {
         taxBox1[i].value = Object.values(testArr[i]);
         taxObj[prev.value][codeInTaxBox1] = parseFloat(taxBox1[i].value);
         taxBox2[i].value = 0
-        
         calculateTax(prev.value)
-        
         next.innerText = obj[prev.value];
       }
       for (let num in newObj) {
@@ -256,6 +253,6 @@ if (scratchBtn !== null && scratchBtn !== undefined) {
           tot += newObj[num];
         }
       }
+      sumAllNumbers()
     });
-  });
 }
