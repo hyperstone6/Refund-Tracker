@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-    background-color: #2E294E;
+    background-color: #444;
     width: 50%;
     min-height: 95vh;
     margin: 1em auto;
@@ -64,6 +64,10 @@ body {
 
 .clear-btn {
     left:9rem;
+}
+
+.calc-btn {
+    left: 17.3rem;
 }
 
 .parse-btn:hover {
@@ -208,8 +212,21 @@ label {
 }
 
 .disclaimer {
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: center;
     color: red;
     margin-top: 3rem;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    margin-top: .5rem;
+    gap: 1rem;
+    font-size: 1.3rem;
+}
+
+img {
+    width: 1.3rem;
+    height: 1.3rem;
 }
