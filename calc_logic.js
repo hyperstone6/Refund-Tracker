@@ -102,6 +102,7 @@ if (nuc !== null || nuc !== undefined) {
 nucCheckBox.addEventListener("click", (e) => {
   if (e.target.checked) {
     nucBlock.style.display = "block";
+    sumAllNumbers()
   } else {
     nucBlock.style.display = "none";
     nuc.value = ""
@@ -153,7 +154,7 @@ function totalTax() {
       totalOfAllTaxes += parseFloat(obj[total]);
     }
   }
-  taxTotal.innerText = totalOfAllTaxes.toFixed(2);
+  taxTotal.innerText = `: ${totalOfAllTaxes.toFixed(2)}`
   sumAllTaxes = totalOfAllTaxes;
 }
 
@@ -167,7 +168,7 @@ function calculateNuc() {
 }
 
 function sumAllNumbers() {
-  if (nucValue) {
+  if (nucValue > 1) {
     grandTotal =
       parseFloat(totBaseWithNuc) +
       parseFloat(sumAllTaxes) -
@@ -178,7 +179,7 @@ function sumAllNumbers() {
       parseFloat(sumAllTaxes) -
       parseFloat(penalties);
   }
-  totalAmount.innerText = grandTotal.toFixed(2);
+  totalAmount.innerText = `: ${grandTotal.toFixed(2)}`
 }
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 
@@ -245,7 +246,7 @@ function parseTaxes(e) {
     taxObj[prev.value][codeInTaxBox1] = parseFloat(taxBox1[i].value);
     taxBox2[i].value = 0;
     calculateTax(prev.value);
-    next.innerText = obj[prev.value];
+    next.innerText = obj[prev.value].toFixed(2);
   }
   for (let num in parsedTaxesObj) {
     if (parsedTaxesObj) {
@@ -258,3 +259,4 @@ function parseTaxes(e) {
 function clearAll() {
   location.reload()
 }
+
