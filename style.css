@@ -81,7 +81,7 @@ body {
 .mid-section {
     display: flex;
     justify-content: center;
-    min-height: 75rem;
+    min-height: 77rem;
 }
 .sub-section {
     width: 100%;
@@ -138,7 +138,7 @@ body {
 }
 
 .tax-box {
-    width: 15%;
+    width: 10%;
     height: var(--box-height);
     text-align: center;
 }
@@ -159,14 +159,14 @@ input[type=number] {
 }
 
 .tax-code {
-    width: 15%;
+    width: 10%;
     height: var(--box-height);
     text-align: center;
     background-color: #EADEDA;
     border: none;
 }
 .tax-result {
-    width: 10%;
+    width: 14%;
     margin: 0rem .3rem .2rem 0;
     /* background-color: greenyellow; */
     color: var(--color-2);
