@@ -53,10 +53,14 @@ function taxBox1Fn(e) {
 function taxBox2Fn(e) {
   let prev = e.target.previousElementSibling.previousElementSibling;
   let next = e.target.nextElementSibling;
+  let boxValue = e.target.value;
+  if(boxValue === "") {
+    boxValue = 0
+  }
   if (taxObj.hasOwnProperty(prev.value)) {
     codeInTaxBox = e.target.dataset.taxBox2;
     let taxCodeValue = prev.value;
-    taxObj[taxCodeValue][codeInTaxBox] = parseFloat(e.target.value);
+    taxObj[taxCodeValue][codeInTaxBox] = parseFloat(boxValue);
     calculateTax(prev.value);
     next.innerText = obj[prev.value].toFixed(2);
     sumAllNumbers();
@@ -102,12 +106,12 @@ if (nuc !== null || nuc !== undefined) {
 nucCheckBox.addEventListener("click", (e) => {
   if (e.target.checked) {
     nucBlock.style.display = "block";
-    sumAllNumbers()
+    sumAllNumbers();
   } else {
     nucBlock.style.display = "none";
-    nuc.value = ""
-    nucValue = 0
-    sumAllNumbers()
+    nuc.value = "";
+    nucValue = 0;
+    sumAllNumbers();
   }
 });
 
@@ -154,7 +158,7 @@ function totalTax() {
       totalOfAllTaxes += parseFloat(obj[total]);
     }
   }
-  taxTotal.innerText = `: ${totalOfAllTaxes.toFixed(2)}`
+  taxTotal.innerText = `: ${totalOfAllTaxes.toFixed(2)}`;
   sumAllTaxes = totalOfAllTaxes;
 }
 
@@ -179,54 +183,67 @@ function sumAllNumbers() {
       parseFloat(sumAllTaxes) -
       parseFloat(penalties);
   }
-  totalAmount.innerText = `: ${grandTotal.toFixed(2)}`
+  totalAmount.innerText = `: ${grandTotal.toFixed(2)}`;
 }
 //\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 
 const scratchpad = document.querySelector("[data-scratchpad]");
 const scratchBtn = document.querySelector("[data-parse-btn]");
-const clearBtn =  document.querySelector("[data-clear-btn]")
+const clearBtn = document.querySelector("[data-clear-btn]");
 
 let pastedText = "";
 let splitted = [];
 let regex;
-let rmvdSpaces = [];
+let trimmed = [];
 let parsedTaxesArr = [];
 let parsedTaxesObj = {};
 let tot = 0;
 
 scratchpad.addEventListener("input", (e) => {
-  if (e.target.value.includes("CAD")) {
-    regex = /TX...CAD/g;
-  } else if (e.target.value.includes("USD")) {
-    regex = /TX...USD/g;
+  let textValue = e.target.value;
+  switch (true) {
+    case textValue.includes("TX") && textValue.includes("CAD"):
+      regex = /TX...CAD/g;
+      break;
+    case textValue.includes("PD") && textValue.includes("CAD"):
+      regex = /PD...CAD/g;
+      break;
+    case textValue.includes("TX") && textValue.includes("USD"):
+      regex = /TX...USD/g;
+      break;
+    case textValue.includes("PD") && textValue.includes("USD"):
+      regex = /PD...USD/g;
+      break;
   }
 });
 
 scratchBtn.addEventListener("click", parseTaxes);
-clearBtn.addEventListener("click", clearAll)
+clearBtn.addEventListener("click", clearAll);
 
 function parseTaxes(e) {
   pastedText = e.target.previousElementSibling.value;
   splitted = pastedText.split(regex);
   for (let index of splitted) {
     if (index) {
-      rmvdSpaces.push(index.replace(/\s/g, ""));
+      trimmed.push(index.trim());
     }
   }
-  for (let index = 0; index < rmvdSpaces.length; index++) {
-    rmvdSpaces[index] = rmvdSpaces[index] + taxBox1[index].dataset.taxBox1.slice(0, 2);
-    let clndKeys = rmvdSpaces[index];
+  for (let index = 0; index < trimmed.length; index++) {
+    trimmed[index] =
+      trimmed[index] + taxBox1[index].dataset.taxBox1.slice(0, 2);
+    let clndKeys = trimmed[index];
     if (!isNaN(parseFloat(clndKeys))) {
       if (parsedTaxesObj[clndKeys.slice(clndKeys.length - 4)]) {
-        parsedTaxesObj[clndKeys.slice(clndKeys.length - 4)] += parseFloat(clndKeys);
+        parsedTaxesObj[clndKeys.slice(clndKeys.length - 4)] +=
+          parseFloat(clndKeys);
         alert(
           `Taxes with same tax code were combined. Combined tax: ${clndKeys.slice(
             clndKeys.length - 2
           )}`
         );
       } else {
-        parsedTaxesObj[clndKeys.slice(clndKeys.length - 4)] = parseFloat(clndKeys);
+        parsedTaxesObj[clndKeys.slice(clndKeys.length - 4)] =
+          parseFloat(clndKeys);
         parsedTaxesArr.push({
           [clndKeys.slice(clndKeys.length - 4)]: parseFloat(clndKeys),
         });
@@ -236,7 +253,7 @@ function parseTaxes(e) {
   for (let i = 0; i < parsedTaxesArr.length; i++) {
     let prev = taxBox1[i].previousElementSibling;
     let next = taxBox1[i].nextElementSibling.nextElementSibling;
-    let nextCode = taxCode[i].nextElementSibling
+    let nextCode = taxCode[i].nextElementSibling;
     codeInTaxBox1 = taxBox1[i].dataset.taxBox1;
     taxCode[i].value = Object.keys(parsedTaxesArr[i]);
     nextCode.disabled = false;
@@ -257,6 +274,5 @@ function parseTaxes(e) {
 }
 
 function clearAll() {
-  location.reload()
+  location.reload();
 }
-
