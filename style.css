@@ -131,6 +131,7 @@ body {
 
 .tax-item {
     margin-top: 1rem;
+    font-size: 1.1rem;
 }
 
 .tax-item:not(:last-child) {
