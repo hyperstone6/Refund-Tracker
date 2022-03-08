@@ -8,7 +8,7 @@ const penalty = document.querySelector("[data-penalty]");
 const nuc = document.querySelector("#nuc-calc");
 const nucCheckBox = document.querySelector("#nuc");
 const nucBlock = document.querySelector(".nuc-calc-block");
-const totalBaseOutput = document.querySelector('[data-fare-total]')
+const totalBaseOutput = document.querySelector("[data-fare-total]");
 const totalAmount = document.querySelector("[data-total-receivable]");
 
 let obj = {};
@@ -20,7 +20,6 @@ let qSurcharge = 0;
 let penalties = 0;
 let nucValue = 0;
 let totalBaseFare = 0;
-let totBaseWithNuc = 0;
 let grandTotal = 0;
 
 taxBox1.forEach((box) => {
@@ -55,8 +54,8 @@ function taxBox2Fn(e) {
   let prev = e.target.previousElementSibling.previousElementSibling;
   let next = e.target.nextElementSibling;
   let boxValue = e.target.value;
-  if(boxValue === "") {
-    boxValue = 0
+  if (boxValue === "") {
+    boxValue = 0;
   }
   if (taxObj.hasOwnProperty(prev.value)) {
     codeInTaxBox = e.target.dataset.taxBox2;
@@ -83,8 +82,8 @@ function taxCodeFn(e) {
 if (unusedFare !== null || unusedFare !== undefined) {
   unusedFare.addEventListener("input", (e) => {
     farePortion = e.target.value;
-    if(farePortion === "") {
-      farePortion = 0
+    if (farePortion === "") {
+      farePortion = 0;
     }
     totalBase();
     sumAllNumbers();
@@ -94,8 +93,8 @@ if (unusedFare !== null || unusedFare !== undefined) {
 if (surcharge !== null || surcharge !== undefined) {
   surcharge.addEventListener("input", (e) => {
     qSurcharge = e.target.value;
-    if(qSurcharge ===  "") {
-      qSurcharge = 0
+    if (qSurcharge === "") {
+      qSurcharge = 0;
     }
     totalBase();
     sumAllNumbers();
@@ -105,7 +104,7 @@ if (surcharge !== null || surcharge !== undefined) {
 if (nuc !== null || nuc !== undefined) {
   nuc.addEventListener("input", (e) => {
     nucValue = e.target.value;
-    calculateNuc();
+    // calculateNuc();
     sumAllNumbers();
   });
 }
@@ -125,8 +124,8 @@ nucCheckBox.addEventListener("click", (e) => {
 if (penalty !== null || penalty !== undefined) {
   penalty.addEventListener("input", (e) => {
     penalties = e.target.value;
-    if(penalties === "") {
-      penalties = 0
+    if (penalties === "") {
+      penalties = 0;
     }
     sumAllNumbers();
   });
@@ -177,23 +176,24 @@ function totalBase() {
   totalBaseFare = totalBaseFare.toFixed(2);
 }
 
-function calculateNuc() {
-  totBaseWithNuc = parseFloat(totalBaseFare) * parseFloat(nucValue);
-}
-
 function sumAllNumbers() {
   if (nucValue > 1) {
     grandTotal =
-      parseFloat(totBaseWithNuc) +
+      parseFloat(totalBaseFare) * parseFloat(nucValue) +
       parseFloat(sumAllTaxes) -
       parseFloat(penalties);
-      totalBaseOutput.innerText = `: ${(parseFloat(totBaseWithNuc) - parseFloat(penalties)).toFixed(2)}`
+    totalBaseOutput.innerText = `: ${(
+      parseFloat(totalBaseFare) * parseFloat(nucValue) -
+      parseFloat(penalties)
+    ).toFixed(2)}`;
   } else {
     grandTotal =
       parseFloat(totalBaseFare) +
       parseFloat(sumAllTaxes) -
       parseFloat(penalties);
-      totalBaseOutput.innerText = `: ${(parseFloat(totalBaseFare) - parseFloat(penalties)).toFixed(2)}`
+    totalBaseOutput.innerText = `: ${(
+      parseFloat(totalBaseFare) - parseFloat(penalties)
+    ).toFixed(2)}`;
   }
   totalAmount.innerText = `: ${grandTotal.toFixed(2)}`;
 }
