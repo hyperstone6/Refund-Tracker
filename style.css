@@ -110,11 +110,6 @@ body {
     padding: .1em .5em;
 }
 
-.add-new-btn:hover {
-    translate: -50px;
-    cursor: pointer;
-}
-
 .chd-iframe{
     height: 100%;
     width: 100%;
